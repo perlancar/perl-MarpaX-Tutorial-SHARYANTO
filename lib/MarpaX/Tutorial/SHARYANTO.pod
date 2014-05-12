@@ -1,0 +1,98 @@
+package MarpaX::Tutorial::SHARYANTO; # just to make PodWeaver happy
+
+# VERSION
+# DATE
+
+1;
+# ABSTRACT: A tutorial of parsing using Marpa
+
+=head1 ABOUT THIS TUTORIAL
+
+- For Perl programmers like me, who are familiar with regular expressions, but
+  pretty much clueless about parsing.
+
+- Example-based, practical, not too much into theory.
+
+- Already know Marpa is cool and the shit (for more about Marpa: XXX).
+
+- For more about parsing, XXX
+
+- link to other tutorials about Marpa and/or parsing: (Ron's tutorial).
+
+
+=head1 ABOUT MARPA
+
+=head1 REGEX VS PARSER
+
+- regex, as most of you already know, is great. great for scraping and
+  extracting some strings like URLs, ...
+
+  for cleaning up data.
+
+regex limitations:
+
+- unstructured, it's all a big long string (rules in perl 6 is an effort to
+  rectify this).
+
+- all or nothing: it's either a match or no match. if no match, no error message
+  specifying exactly where or how it fails. reduces reusability and readability.
+  of course, you can compose a regex from string or regexp object parts, but
+  still...
+
+- not optimal for some classes of problems. examples: org::parser, markdown, ...
+
+- grammar is readable and more abstract, can ignore whitespace (while in regex
+  we need to always specify 'blah \s+ blah \s* ...' which can get tedious fast.
+
+=head1 GRAMMAR
+
+about BNF (EBNF, ABNF): it's even an ISO standard.
+
+allows + and * like in regex (one or more, zero or more).
+
+character class (negative class not supported).
+
+but that's it. don't expect it to support full regex metacharacters because they
+aren't (this is different from perl 6's rules which supports the full regex
+features and mixes regex and grammar, but we're not discussing perl 6 rules in
+this ...)
+
+note that there are variants of BNF/EBNF (some uses = instead of ::=, some use
+{...} for repetition instead of +. some uses ' to quote literals, some uses ".
+some uses ;, some uses (* ... *) for comment (remember the good old days of
+pascal? that's because niklaus wirth, the guy behind pascal, is also one of the
+people who first developed EBNF). marpa uses # a la Perl.
+
+also,
+
+
+=head1
+
+a regex: [A-Z]
+
+.+ -> i've seen people (stuifzand) writes <any char> as [\d\D].
+
+how would we write it
+
+when to use ~ (to define tokens) vs ::= (to define rules)?
+
+link: Regexp::Grammars.
+
+debugging: trace_terminals, trace_values.
+
+what is lexeme
+
+the calc examples go step by step from parsing number, 'num + num' & 'num - num'
+to supporting * (precedence, technique is to go from the lowest to highest).
+
+then example of parsing markdown
+
+then json
+
+in literal (single quote) there is no escaping mechanism, so backslash is
+represented as '\' and not '\\'. to specify single quote itself, use ['] or
+[\x27].
+
+dapet 'Marpa: Scanless G1 Earley item count (134) exceeds warning threshold' at
+/home/s1/perl5/perlbrew/perls/perl-5.18.2/lib/site_perl/5.18.2/x86_64-linux/Marpa/R2/SLR.pm
+line 868.
